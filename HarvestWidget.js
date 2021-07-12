@@ -10,7 +10,7 @@ class HarvestWidget {
     // must pass in the require function to this script to avoid recursive imports
     this.require = require
     let defaultOptions = {
-      mode: 'clients' //or projects
+      mode: 'client' //or project
     }
     this.options = Object.assign(defaultOptions, options)
     this.api = undefined
@@ -53,7 +53,7 @@ class HarvestWidget {
 
       let weekTotal = this._.sumBy(result, 'hours').toFixed(2)
 
-      let type = 'client' // TODO get this from config. could also be 'project'
+      let type = this.options.mode
       let items = []
       let grouped = this._.groupBy(result, `${type}.id`)
       let sumBy = this._.sumBy
