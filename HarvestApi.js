@@ -1,12 +1,10 @@
-// Variables used by Scriptable.
-// These must be at the very top of the file. Do not edit.
-// icon-color: light-brown; icon-glyph: magic;
 
 let account_id, access_token, widget
 
 class Harvest {
     constructor() {
         this.baseUrl = 'https://api.harvestapp.com/v2/'
+        this.user_id = null
     }
     async initCreds() {
         if (!Keychain.contains("harvestAccountID") || !Keychain.contains("harvestAccessToken")) {
@@ -47,6 +45,7 @@ class Harvest {
         Keychain.set("harvestAccountID", account_id)
         Keychain.set("harvestAccessToken", access_token)
     }
+
     async _callHarvestAPI(endpoint, method="POST") {
         let req = new Request(this.baseUrl + endpoint)
         req.headers = { "Harvest-Account-Id": this.account_id, "Authorization": "Bearer " + this.access_token }
@@ -55,6 +54,32 @@ class Harvest {
             throw new Error(`Harvest API Error: ${json.error}`)
         }
         return json
+    }
+
+    async _returnUserID() {
+        if (this.user_id !== null) return this.user_id
+        let json = await this._callHarvestAPI('users/me')
+        this.user_id = json.id
+        return this.user_id
+    }
+
+    async getMyTimeEntries(from, to) {
+        from = this.formatDate(from)
+        to = this.formatDate(to)
+        let user_id = await this._returnUserID()
+        let page = 1
+        let result
+        let fullList = []
+
+        while(true) {
+            let endpoint = `time_entries?from=${from}&to=${to}&user_id=${user_id}&page=${page}`
+            result = await this._callHarvestAPI(endpoint)
+            fullList = fullList.concat(result.time_entries)
+            page = result.next_page   
+            if (page === null) break
+        }
+        this.fullList = fullList
+        return this.fullList
     }
 
     formatDate(d) {
@@ -67,4 +92,4 @@ class Harvest {
     }
 }
 
-module.exports = {Harvest}
+module.exports = Harvest
