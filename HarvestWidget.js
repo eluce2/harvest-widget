@@ -3,7 +3,7 @@
 // eric.luce@proofgeist.com
 
 let forceDownload = config.runsInApp
-forceDownload = false // DEV ONLY (use local copy)
+//forceDownload = false // DEV ONLY (use local copy)
 
 class HarvestWidget {
   constructor(require, options={}) {
@@ -120,14 +120,14 @@ class HarvestWidget {
         let clientName = stack.addText(item.client_name)
         clientName.font = Font.semiboldSystemFont(18)
         clientName.lineLimit = 1
+			  clientName.textColor = Color.white()
         stack.addSpacer()
         let totalHours = stack.addText(item.total_hours.toString())
-        totalHours.color = Color.white()
+        totalHours.textColor = Color.white()
       } else {
         let clientName = stack.addText(" ")
         clientName.font = Font.semiboldSystemFont(18)
       }
-      clientName.color = Color.white()
       content.addSpacer(this.spacing)
     }
     
