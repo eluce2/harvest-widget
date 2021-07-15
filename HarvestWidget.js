@@ -120,14 +120,15 @@ class HarvestWidget {
         let clientName = stack.addText(item.client_name)
         clientName.font = Font.semiboldSystemFont(18)
         clientName.lineLimit = 1
+        clientName.color = Color.white()
         stack.addSpacer()
         let totalHours = stack.addText(item.total_hours.toString())
         totalHours.color = Color.white()
       } else {
         let clientName = stack.addText(" ")
         clientName.font = Font.semiboldSystemFont(18)
+        clientName.color = Color.white()
       }
-      clientName.color = Color.white()
       content.addSpacer(this.spacing)
     }
     
