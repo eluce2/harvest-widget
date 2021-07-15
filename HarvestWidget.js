@@ -60,7 +60,7 @@ class HarvestWidget {
       this._.each(Object.keys(grouped), function(id) {
         let rows = grouped[id]
         let client_name = rows[0][type].name
-        let total_hours = sumBy(rows, 'hours').toFixed(2)
+        let total_hours = parseFloat(sumBy(rows, 'hours').toFixed(2))
         items.push({ client_name, total_hours })
       })
       
