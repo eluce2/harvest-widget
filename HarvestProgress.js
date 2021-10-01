@@ -1,4 +1,4 @@
-// version 1.0 | 2021-10-01
+// version 1.5 | 2021-06-13
 // eric.luce@proofgeist.com
 
 let forceDownload = config.runsInApp;
@@ -93,6 +93,7 @@ class HarvestWidget {
     if (day == 6) day = 5; //ignore saturdays
     let canvasWidth = 300;
     let progressBarHeight = 25;
+    let widgetText;
 
     // day progress
     let content = widget.addStack();
@@ -107,10 +108,12 @@ class HarvestWidget {
     let text = dayGoalMet
       ? `${convertTime(dayTotal - dayGoal)} ahead`
       : `${convertTime(dayGoal - dayTotal)} behind`;
-    textBar.addText(text);
+    widgetText = textBar.addText(text);
+    widgetText.color = Color.white();
     text = `Day Total: ${convertTime(dayTotal)}`;
     textBar.addSpacer();
-    textBar.addText(text);
+    widgetText = textBar.addText(text);
+    widgetText.color = Color.white();
 
     let drawContext = new DrawContext();
     drawContext.size = new Size(canvasWidth, progressBarHeight);
@@ -147,11 +150,13 @@ class HarvestWidget {
       convertTime(weekProgressGoal - weekTotal),
       convertTime(weekTotal)
     );
-    textBar.addText(text);
+    widgetText = textBar.addText(text);
+    widgetText.color = Color.white();
 
     text = `Week Total: ${convertTime(weekTotal)}`;
     textBar.addSpacer();
-    textBar.addText(text);
+    widgetText = textBar.addText(text);
+    widgetText.color = Color.white();
 
     drawContext = new DrawContext();
     drawContext.size = new Size(canvasWidth, progressBarHeight);
