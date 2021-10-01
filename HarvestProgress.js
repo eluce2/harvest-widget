@@ -109,11 +109,11 @@ class HarvestWidget {
       ? `${convertTime(dayTotal - dayGoal)} ahead`
       : `${convertTime(dayGoal - dayTotal)} behind`;
     widgetText = textBar.addText(text);
-    widgetText.color = Color.white();
+    widgetText.textColor = Color.white();
     text = `Day Total: ${convertTime(dayTotal)}`;
     textBar.addSpacer();
     widgetText = textBar.addText(text);
-    widgetText.color = Color.white();
+    widgetText.textColor = Color.white();
 
     let drawContext = new DrawContext();
     drawContext.size = new Size(canvasWidth, progressBarHeight);
@@ -151,12 +151,12 @@ class HarvestWidget {
       convertTime(weekTotal)
     );
     widgetText = textBar.addText(text);
-    widgetText.color = Color.white();
+    widgetText.textColor = Color.white();
 
     text = `Week Total: ${convertTime(weekTotal)}`;
     textBar.addSpacer();
     widgetText = textBar.addText(text);
-    widgetText.color = Color.white();
+    widgetText.textColor = Color.white();
 
     drawContext = new DrawContext();
     drawContext.size = new Size(canvasWidth, progressBarHeight);
