@@ -56,10 +56,11 @@ class HarvestWidget {
       let weekTotal = this._.sumBy(result, "hours").toFixed(2);
 
       let d = new Date();
+      let todayString = `${d.getFullYear()}-${
+        d.getMonth() + 1 < 10 ? "0" : ""
+      }${d.getMonth() + 1}-${d.getDate() < 10 ? "0" : ""}${d.getDate()}`;
       let dayFilter = this._.filter(result, (o) => {
-        let dateString = d.toISOString().slice(0, 10);
-        // console.log(dateString);
-        return dateString == o.spent_date;
+        return todayString == o.spent_date;
       });
       let dayTotal = this._.sumBy(dayFilter, "hours").toFixed(2);
 
@@ -146,10 +147,6 @@ class HarvestWidget {
     text = weekProgressGoalMet
       ? `${convertTime(weekTotal - weekProgressGoal)} ahead`
       : `${convertTime(weekProgressGoal - weekTotal)} behind`;
-    console.log(
-      convertTime(weekProgressGoal - weekTotal),
-      convertTime(weekTotal)
-    );
     widgetText = textBar.addText(text);
     widgetText.textColor = Color.white();
 
