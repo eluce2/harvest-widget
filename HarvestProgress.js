@@ -91,7 +91,7 @@ class HarvestWidget {
 
     let d = new Date();
     let day = d.getDay();
-    if (day == 6) day = 5; //ignore saturdays
+    if (day == 6 || day == 0) day = 5; //ignore weekends
     let canvasWidth = 300;
     let progressBarHeight = 25;
     let widgetText;
